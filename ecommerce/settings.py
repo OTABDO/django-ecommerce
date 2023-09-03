@@ -56,7 +56,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'store.views.categories',  # All categories will be available in all pages of the website
                 'cart.context_processors.cart',  # Context Processor for session handling
-                'cart.custom_processors.say_hello',  # tinker with sessions
+                #'cart.custom_processors.say_hello',  # tinker with sessions
             ],
         },
     },
