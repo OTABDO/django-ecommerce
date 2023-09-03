@@ -30,7 +30,8 @@ class Cart:
     def __iter__(self):
         all_product_ids = self.cart.keys()
         products = Product.objects.filter(id__in=all_product_ids)
-        cart = self.cart.copy()
+        import copy
+        cart = copy.deepcopy(self.cart)
         for product in products:
             cart[str(product.id)]['product'] = product
 
@@ -43,3 +44,16 @@ class Cart:
     def get_total_price(self):
         return sum(Decimal(item['price']) * item['qty'] for item in self.cart.values())
 
+    def delete(self, product):
+        product_id = str(product)
+        if product_id in self.cart:
+            del self.cart[product_id]
+
+        self.session.modified = True
+
+    def update(self, product, qty):
+        product_id = str(product)
+        product_qty = qty
+        if product_id in self.cart:
+            self.cart[product_id]['qty'] = product_qty
+        self.session.modified = True
