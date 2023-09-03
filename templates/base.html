@@ -12,7 +12,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-	  <title> Edenthought </title>
+	  <title> Edenthought | </title>
 
 
 
@@ -139,6 +139,7 @@
 
 
                         <i class="fa fa-shopping-cart" aria-hidden="true"> </i>
+                        &nbsp;
                         <div id="cart-qty" class="d-inline-flex">
                             {% with qty_amount=cart|length %}
                                 {% if qty_amount > 0 %}
@@ -166,10 +167,10 @@
 
 
     <body>
+        {{ custom_session }}
 
+        {% block content %}
 
-        {% block content %} 
-        
         
 
 
