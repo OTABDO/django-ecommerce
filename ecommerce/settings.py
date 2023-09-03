@@ -28,6 +28,9 @@ INSTALLED_APPS = [
     # My Apps
     'store.apps.StoreConfig',
     'cart.apps.CartConfig',
+    # Third party apps
+    'mathfilters',
+
 ]
 
 MIDDLEWARE = [
