@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <body style="background-color: darkgray">
+    <br>
+    <div class="container bg-white shadow-md p-5 form-layout">
+        <h3>Create your account</h3>
+        <h5>Purchase your favorite articles</h5>
+        <br>
+        <br>
+        {% if messages %}
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+        <form method="POST" autocomplete="off">
+            {% csrf_token %}
+            {{ form.username|as_crispy_field}}
+            <br>
+            <br>
+            {{ form.email|as_crispy_field}}
+            <br>
+            <br>
+            {{ form.password1|as_crispy_field}}
+            <br>
+            {{ form.password2|as_crispy_field}}
+            <br>
+            <br>
+            <button type="submit" value="register" class="btn btn-primary btn-lg w-100 bt-block p-2">Create account
+            </button>
+        </form>
+    </div>
+    </body>
+    <br>
+    <br>
+{% endblock %}
