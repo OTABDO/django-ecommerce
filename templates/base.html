@@ -114,18 +114,30 @@
         <div class="collapse navbar-collapse text-center" id="navbarNavDropdown">
             
             <ul class="navbar-nav ms-auto">
-
+                {% if user.is_authenticated %}
 
                 <li class="nav-item">
-            
+
+                    <a class="btn btn-alert navbar-btn text-white" type="button"  href="{% url 'account:logout' %}"> Logout </a>
+
+                </li>
+
+                {% else %}
+
+                <li class="nav-item">
+
                     <a class="btn btn-alert navbar-btn text-white" type="button"  href="{% url 'account:register' %}"> Register </a>
 
                 </li>
 
+                {% endif %}
 
                 <li class="nav-item">
-
-                    <a class="btn btn-alert navbar-btn text-white" type="button"  href="/"> Login </a>
+                    {% if user.is_authenticated %}
+                    <a class="btn btn-alert navbar-btn text-white" type="button"  href="{% url 'account:dashboard' %}"> Dashboard </a>
+                    {% else %}
+                    <a class="btn btn-alert navbar-btn text-white" type="button"  href="{% url 'account:my-login' %}"> Login </a>
+                    {% endif %}
 
                 </li>
 
@@ -165,6 +177,18 @@
 
 
     </nav>
+    {% for message in messages %}
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+            <div id="message-timer" class="alert alert-success text-center">{{ message }}</div>
+        {% endif %}
+         {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+            <div id="message-timer" class="alert alert-danger text-center">{{ message }}</div>
+        {% endif %}
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.INFO %}
+            <div id="message-timer" class="alert alert-info text-center">{{ message }}</div>
+        {% endif %}
+    {% endfor %}
+
 
 
     <body>
@@ -185,5 +209,5 @@
 
     </body>
 
-
+    <script src="{% static 'js/app.js' %}"></script>
 </html>

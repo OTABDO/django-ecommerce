@@ -30,9 +30,11 @@
 
 
                 <br>
-        
-                <a href="{% url 'account:register' %}" class="btn btn-primary my-2"> Create an account </a>
-                
+                {% if user.is_authenticated %}
+                    <a href="{% url 'account:dashboard' %}" class="btn btn-primary my-2"> <i class="fa fa-regular fa-user"> &nbsp;</i> Dashboard </a>
+                {% else %}
+                    <a href="{% url 'account:register' %}" class="btn btn-primary my-2"> <i class="fa fa-regular fa-user"> &nbsp;</i> Create an account </a>
+                {% endif %}
                 
             </div>
         
