@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     # My Apps
     'store.apps.StoreConfig',
     'cart.apps.CartConfig',
+    'payment.apps.PaymentConfig',
     'account.apps.AccountConfig',
     # Third party apps
     'mathfilters',
@@ -142,3 +143,8 @@ EMAIL_USE_TLS = 'True'
 
 EMAIL_HOST_USER = 'safwan.dvma@gmail.com'
 EMAIL_HOST_PASSWORD = 'bhnpvpmgplpomisy'
+
+# Allow PayPal Popups
+
+SECURE_CROSS_ORIGIN_OPENER_POLICY = 'same-origin-allow-popups'
+

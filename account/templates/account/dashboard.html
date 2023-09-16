@@ -24,7 +24,7 @@
         <p>Track all of your orders here: </p>
         <hr>
 
-     <a class="btn btn-primary navbar-btn text-white" type="button" href="">Track my orders</a>
+     <a class="btn btn-primary navbar-btn text-white" type="button" href="{% url 'account:track-orders' %}">Track my orders</a>
     </div>
     <br>
     <br>
@@ -34,9 +34,23 @@
         <hr>
         <a class="btn btn-primary navbar-btn text-white" type="button" href="{% url 'account:profile-management' %}">Profile Management</a>
 
-        <br><br>
+        <br>
+        <br>
+    </div>
+     <br>
+        <br>
+        <div class="container bg-white shadow-md p-5 form-layout">
+            <h4>Manage Shipping</h4>
+        <p>Update Your Shipping Information </p>
+        <hr>
+        <a class="btn btn-primary navbar-btn text-white" type="button" href="{% url 'account:manage-shipping' %}">Update Shipping</a>
+
+        <br>
     </div>
      <br><br>
+
+
+
 
 
 

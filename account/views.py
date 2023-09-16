@@ -1,6 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib.sites.shortcuts import get_current_site
 from django.contrib import messages
+from django.views.decorators.cache import never_cache
+from payment.froms import ShippingModelForm
+from payment.models import ShippingAddress
+from payment.models import Order, OrderItem
 from .forms import CreateUserForm, LoginForm, UpdateUserForm
 from .token import user_tokenizer_generate
 from django.template.loader import render_to_string
@@ -69,7 +73,7 @@ def email_verification_success(request):
 def email_verification_failed(request):
     return render(request, template_name='account/registration/email-verification-failed.html')
 
-
+@never_cache
 def my_login(request):
     form = LoginForm
     if request.method == 'POST':
@@ -128,3 +132,37 @@ def delete_account(request):
         messages.error(request, "Account deleted")
         return redirect('store:store')
     return render(request, template_name='account/delete-account.html')
+
+
+# Shipping View
+@login_required()
+def manage_shipping(request):
+    try:
+        # Account user with shipment information
+        shipping = ShippingAddress.objects.get(user = request.user.id)
+    except ShippingAddress.DoesNotExist:
+
+        # Account user with no shipment information
+        shipping = None
+
+    form = ShippingModelForm(instance=shipping)
+    if request.method == "POST":
+        form = ShippingModelForm(request.POST, instance=shipping)
+        if form.is_valid():
+            # Assign the user foreign key to the object
+            shipping_user = form.save(commit=False)
+            shipping_user.user = request.user
+            shipping_user.save()
+            return redirect('account:dashboard')
+
+    context = {'form': form}
+    return render(request, template_name='account/manage-shipping.html', context=context)
+
+@login_required(login_url='my-login')
+def track_orders(request):
+    try:
+        orders = OrderItem.objects.filter(user=request.user)
+        context = {'orders':orders}
+        return render(request, template_name='track-orders.html', context=context)
+    except:
+        return render(request, template_name='track-orders.html')
