@@ -25,6 +25,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "django_extensions",
+
     # My Apps
     'store.apps.StoreConfig',
     'cart.apps.CartConfig',
