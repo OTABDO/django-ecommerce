@@ -33,10 +33,8 @@ INSTALLED_APPS = [
     'payment.apps.PaymentConfig',
     'account.apps.AccountConfig',
     # Third party apps
-    'mathfilters',
-    'crispy_forms',
-    'crispy_bootstrap4',
-
+    
+    
 ]
 
 MIDDLEWARE = [
@@ -149,4 +147,3 @@ EMAIL_HOST_PASSWORD = ''
 # Allow PayPal Popups
 
 SECURE_CROSS_ORIGIN_OPENER_POLICY = 'same-origin-allow-popups'
-
